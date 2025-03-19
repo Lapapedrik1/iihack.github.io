@@ -1,0 +1,167 @@
+:root {
+    --neon-green: #0f0;
+    --neon-purple: #f0f;
+    --cyber-black: #000;
+    --terminal-speed: 0.05s;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background: var(--cyber-black);
+    font-family: 'Courier New', monospace;
+    min-height: 100vh;
+    overflow: hidden;
+}
+
+/* Matrix Background */
+#matrix {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 0;
+    opacity: 0.1;
+}
+
+/* Cyber Overlay Effect */
+.cyber-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: repeating-linear-gradient(
+        0deg,
+        rgba(0, 255, 0, 0.05) 0px,
+        rgba(0, 255, 0, 0.05) 2px,
+        transparent 2px,
+        transparent 4px
+    );
+    pointer-events: none;
+    animation: scanlines 1s linear infinite;
+}
+
+@keyframes scanlines {
+    from { background-position: 0 0; }
+    to { background-position: 0 8px; }
+}
+
+/* Cyber Button */
+.cyber-button {
+    position: relative;
+    padding: 2rem 4rem;
+    background: transparent;
+    border: 3px solid var(--neon-green);
+    color: var(--neon-green);
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: all 0.3s;
+    overflow: hidden;
+    margin: 2rem;
+}
+
+.button-text {
+    position: relative;
+    z-index: 2;
+    text-shadow: 0 0 10px var(--neon-green);
+}
+
+.cyber-button::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 300%;
+    height: 300%;
+    background: radial-gradient(circle, 
+        rgba(0, 255, 0, 0.2) 0%, 
+        transparent 70%);
+    transform: translate(-50%, -50%);
+    transition: all 0.5s;
+    opacity: 0;
+}
+
+.cyber-button:hover::before {
+    opacity: 1;
+    width: 350%;
+    height: 350%;
+}
+
+.button-particles {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+/* Terminal Styles */
+.hack-terminal {
+    width: 80%;
+    height: 0;
+    margin: 2rem auto;
+    border: 2px solid var(--neon-green);
+    box-shadow: 0 0 30px rgba(0, 255, 0, 0.2);
+    overflow: hidden;
+    opacity: 0;
+    transition: all 1s ease;
+}
+
+.terminal-content {
+    padding: 2rem;
+    color: var(--neon-green);
+    text-shadow: 0 0 10px var(--neon-green);
+}
+
+.progress-bar {
+    width: 100%;
+    height: 4px;
+    background: rgba(0, 255, 0, 0.1);
+}
+
+.progress-fill {
+    width: 0%;
+    height: 100%;
+    background: var(--neon-purple);
+    transition: width 0.5s ease;
+}
+
+/* Animations */
+@keyframes glitch {
+    0% { transform: translate(0); }
+    20% { transform: translate(-3px, 2px); }
+    40% { transform: translate(3px, -2px); }
+    60% { transform: translate(-2px, 1px); }
+    80% { transform: translate(2px, -1px); }
+    100% { transform: translate(0); }
+}
+
+.glitch {
+    animation: glitch 0.5s infinite;
+    position: relative;
+}
+
+.glitch::before,
+.glitch::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.glitch::before {
+    color: var(--neon-purple);
+    animation: glitch 0.3s infinite;
+    clip-path: polygon(0 20%, 100% 20%, 100% 30%, 0 30%);
+}
+
+.glitch::after {
+    color: cyan;
+    animation: glitch 0.3s infinite reverse;
+    clip-path: polygon(0 60%, 100% 60%, 100% 70%, 0 70%);
+}
