@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Hacker Simulation Interface - GitHub Pages Version">
+    <title>CyberHack | GitHub Pages</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💻</text></svg>">
+</head>
+<body>
+    <canvas id="matrixCanvas"></canvas>
+    
+    <div class="container">
+        <button id="hackButton" class="cyber-button">
+            <span class="glow-text">INITIATE_HACK.EXE</span>
+        </button>
+        <div id="hackMessage" class="cyber-terminal"></div>
+    </div>
+
+    <script src="scripts/effects.js"></script>
+    <script>
+        // Main functionality
+        document.getElementById('hackButton').addEventListener('click', () => {
+            const button = document.getElementById('hackButton');
+            const message = document.getElementById('hackMessage');
+            
+            button.style.display = 'none';
+            message.innerHTML = `
+                <div class="terminal-line">> Initializing breach protocol...</div>
+                <div class="terminal-line">> Bypassing firewall... <span class="status-success">[SUCCESS]</span></div>
+                <div class="terminal-glitch">${'%'.repeat(30)}</div>
+                <div class="terminal-result">*** SYSTEM COMPROMISED ***</div>
+            `;
+            message.classList.add('active');
+        });
+    </script>
+</body>
+</html>
